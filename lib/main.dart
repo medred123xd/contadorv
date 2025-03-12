@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  runApp(const MyApp());}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -8,15 +9,53 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Material App',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Material App Bar'),
+      title: 'flutter demo',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurpleAccent),
         ),
-        body: const Center(
-          child: Text('Hello World'),
-        ),
-      ),
+        home: const MyHomePage(title:'flutter demo home page')
     );
   }
+}
+
+class MyHomePage extends StatefulWidget{
+  const MyHomePage({super.key,required this.title});
+  final String title;
+  @override
+  State<MyHomePage> createState()=> _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage>{
+int _counter =0;
+void _incrementcounter(){
+  setState((){
+    _counter++;
+  });
+}
+@override
+ Widget build(BuildContext context) {
+   return Scaffold(
+    appBar: AppBar(
+      backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+      title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+        mainAxisAlignment:MainAxisAlignment.center,
+        children:<Widget>[
+          const Text('you have pushed the button this many times:'),
+           Text(
+            '$_counter',
+            style: Theme.of(context).textTheme.headlineMedium,
+          )
+        ]
+      )
+    ),
+    floatingActionButton: FloatingActionButton(
+      onPressed: _incrementcounter,
+      tooltip: 'increment',
+      child: const Icon(Icons.add),
+    ),
+   ) ;
+ }
 }
